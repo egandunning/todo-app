@@ -1,1 +1,42 @@
-/* You can add global styles to this file, and also import other style files */
+label, input, button, p {
+   font-family: sans-serif;
+}
+
+button {
+   padding: 0.5em;
+   border-radius: 10px;
+   border: 1px solid black;
+   box-shadow: 0 5px gray;
+   font-size: 1em;
+}
+
+button.btn-blue {
+   background-color: #222290;
+   color: #eee;
+}
+
+button.btn-green {
+   background-color: #229022;
+   color: #eee;
+}
+
+/*darken background and lighten text*/
+button.btn-blue:hover {
+   background-color: #111190;
+   color: white;
+}
+
+button.btn-green:hover {
+   background-color: #119011;
+   color: white;
+}
+
+/*animate button press*/
+button:active {
+   box-shadow: 0 1px gray;
+   transform: translateY(4px);
+}
+
+body {
+   background-color: #eeefef;
+}
