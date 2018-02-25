@@ -1,0 +1,19 @@
+div {
+   margin: 1em auto;
+   padding: 1em 5em;
+   width: 20em;
+   text-align: center;
+   border: 1px solid black;
+   box-shadow: 2px 3px 5px grey;
+   background-color: #f8f8f8;
+}
+
+label {
+   text-align: left;
+   display: inline-block;
+   width: 5em;
+}
+
+input, button {
+   margin: .5em;
+}
