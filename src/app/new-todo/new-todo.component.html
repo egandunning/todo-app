@@ -1,0 +1,8 @@
+<div class="container">
+  <form>
+    <p>What do you need to do?</p>
+    <input type="text" [(ngModel)]="todo.text" name="todoText"
+        autocomplete="off">
+    <button class="btn-blue" (click)="submitTodo()">Submit</button>
+  </form>
+</div>
