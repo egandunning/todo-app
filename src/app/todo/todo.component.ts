@@ -9,6 +9,8 @@ import { Todo } from '../todo';
 })
 export class TodoComponent implements OnInit {
 
+  icon: '../../assets/done.png';
+
   @Input() text: string;
   @Input() completed: boolean;
   @Input() completedAt: number;
@@ -16,6 +18,10 @@ export class TodoComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+  }
+
+  complete() {
+    this.completed = !this.completed;
   }
 
 }

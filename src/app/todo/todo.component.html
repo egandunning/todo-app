@@ -1,4 +1,8 @@
 <div class="container">
-  <p class="text">{{text}} ({{completed ? 'done!' : 'not done.'}})</p>
+  <p class="text">
+    <img [src]="completed ? '../../assets/done.png' : '../../assets/notdone.png'"
+        (click)="complete()">
+    {{text}} ({{completed ? 'done!' : 'not done.'}})
+  </p>
   <p class="date">{{completedAt}}</p>
 </div>

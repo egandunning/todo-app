@@ -4,6 +4,13 @@ div {
     padding: 0.5em;
 }
 
+img {
+    height: 1em;
+    width: 1em;
+    margin-right: 0.5em;
+}
+
 p {
-    padding-left: 3em;
+    padding-left: 2em;
+    margin: 1em;
 }
