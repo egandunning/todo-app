@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { Todo } from '../todo';
 import { TodoComponent } from '../todo/todo.component';
+import { TodoService } from '../todo.service';
 
 @Component({
   selector: 'app-todo-list',
@@ -10,30 +11,15 @@ import { TodoComponent } from '../todo/todo.component';
 })
 export class TodoListComponent implements OnInit {
 
-  todos: Todo[] = [
-    new Todo(
-      'test',
-      'do the dishes',
-      false,
-      null  
-    ),
-    new Todo(
-      'test',
-      'clean the kitchen',
-      false,
-      null
-    ),
-    new Todo(
-      'test',
-      'drive to MN',
-      true,
-      null
-    )
-  ];
+  todos: Todo[];
 
-  constructor() { }
+  constructor(private todoService: TodoService) { }
 
   ngOnInit() {
+    this.getTodos();
   }
 
+  getTodos(): void {
+    this.todos = this.todoService.getTodos();
+  }
 }

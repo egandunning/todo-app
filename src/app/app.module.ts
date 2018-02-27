@@ -8,6 +8,7 @@ import { LoginComponent } from './login/login.component';
 import { TodoComponent } from './todo/todo.component';
 import { NewTodoComponent } from './new-todo/new-todo.component';
 import { TodoListComponent } from './todo-list/todo-list.component';
+import { TodoService } from './todo.service';
 
 
 @NgModule({
@@ -22,7 +23,9 @@ import { TodoListComponent } from './todo-list/todo-list.component';
     BrowserModule,
     FormsModule
   ],
-  providers: [],
+  providers: [
+    TodoService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
