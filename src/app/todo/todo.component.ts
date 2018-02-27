@@ -11,9 +11,7 @@ export class TodoComponent implements OnInit {
 
   icon: '../../assets/done.png';
 
-  @Input() text: string;
-  @Input() completed: boolean;
-  @Input() completedAt: number;
+  @Input() todo: Todo;
 
   constructor() { }
 
@@ -21,7 +19,7 @@ export class TodoComponent implements OnInit {
   }
 
   complete() {
-    this.completed = !this.completed;
+    this.todo.completed = !this.todo.completed;
   }
 
 }

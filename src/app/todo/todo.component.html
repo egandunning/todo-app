@@ -1,8 +1,8 @@
 <div class="container">
   <p class="text">
-    <img [src]="completed ? '../../assets/done.png' : '../../assets/notdone.png'"
+    <img [src]="todo.completed ? '../../assets/done.png' : '../../assets/notdone.png'"
         (click)="complete()">
-    {{text}} ({{completed ? 'done!' : 'not done.'}})
+    {{todo.text}} ({{todo.completed ? 'done!' : 'not done.'}})
   </p>
-  <p class="date">{{completedAt}}</p>
+  <p class="date">{{todo.completedAt}}</p>
 </div>
