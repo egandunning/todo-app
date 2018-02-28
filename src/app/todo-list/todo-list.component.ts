@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Todo } from '../todo';
 import { TodoComponent } from '../todo/todo.component';
 import { TodoService } from '../todo.service';
+import { MessageService } from '../message.service';
 
 @Component({
   selector: 'app-todo-list',
@@ -20,6 +21,6 @@ export class TodoListComponent implements OnInit {
   }
 
   getTodos(): void {
-    this.todos = this.todoService.getTodos();
+    this.todoService.getTodos().subscribe(todos => this.todos = todos);
   }
 }

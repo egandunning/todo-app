@@ -9,6 +9,8 @@ import { TodoComponent } from './todo/todo.component';
 import { NewTodoComponent } from './new-todo/new-todo.component';
 import { TodoListComponent } from './todo-list/todo-list.component';
 import { TodoService } from './todo.service';
+import { MessagesComponent } from './messages/messages.component';
+import { MessageService } from './message.service';
 
 
 @NgModule({
@@ -17,14 +19,16 @@ import { TodoService } from './todo.service';
     LoginComponent,
     TodoComponent,
     NewTodoComponent,
-    TodoListComponent
+    TodoListComponent,
+    MessagesComponent
   ],
   imports: [
     BrowserModule,
     FormsModule
   ],
   providers: [
-    TodoService
+    TodoService,
+    MessageService
   ],
   bootstrap: [AppComponent]
 })
