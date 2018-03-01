@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { Todo } from '../todo';
 import { TodoComponent } from '../todo/todo.component';
+import { NewTodoComponent } from '../new-todo/new-todo.component';
 import { TodoService } from '../todo.service';
 import { MessageService } from '../message.service';
 
