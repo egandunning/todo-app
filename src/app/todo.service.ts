@@ -18,11 +18,13 @@ export class TodoService {
 
   getTodos(): Observable<Todo[]> {
     //todo: display message after fetching todos
-    this.messageService.add('fetched todos. ' + new Date().toString());
+    this.messageService.add('fetched todos. ' + new Date().toLocaleDateString());
     return of(this.todos);
   }
 
   addTodo(todo: Todo) {
+    //todo: send to server
     this.todos.unshift(todo);
+    this.messageService.add('added todo. ' + new Date().toLocaleDateString());
   }
 }

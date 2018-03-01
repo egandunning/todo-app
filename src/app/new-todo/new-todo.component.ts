@@ -26,7 +26,6 @@ export class NewTodoComponent implements OnInit {
   }
 
   submitTodo() {
-    alert("todo: send this to server:" + this.todo.text);
     this.todoService.addTodo(Object.assign({}, this.todo));
     this.todo.text = '';
   }
