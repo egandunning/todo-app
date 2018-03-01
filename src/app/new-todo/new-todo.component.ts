@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import { Todo } from '../todo';
+import { TodoService } from '../todo.service';
 
 @Component({
   selector: 'app-new-todo',
@@ -17,13 +18,16 @@ export class NewTodoComponent implements OnInit {
     completedAt: null
   };
 
-  constructor() { }
+  private creator: string;
+
+  constructor(private todoService: TodoService) { }
 
   ngOnInit() {
   }
 
   submitTodo() {
     alert("todo: send this to server:" + this.todo.text);
+    this.todoService.addTodo(Object.assign({}, this.todo));
     this.todo.text = '';
   }
 }
