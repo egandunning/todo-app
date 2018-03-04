@@ -24,7 +24,8 @@ export class AuthService {
       .subscribe((res) => {
         if(res.status === 200) {
           this.token = res.headers.get('X-Auth')
-          resolve(this.token);
+          const body: any = res.body;
+          resolve(body.email);
         }
         reject("Incorrect credentials");
       });

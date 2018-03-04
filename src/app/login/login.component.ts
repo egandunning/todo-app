@@ -1,27 +1,31 @@
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
-import { LoginService } from '../login.service';
+import { AuthService } from '../auth.service';
+import { MessageService } from '../message.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
-  providers: [LoginService]
+  providers: [AuthService]
 })
 export class LoginComponent implements OnInit {
 
   public email: string;
   public password: string;
 
-  constructor(private loginService: LoginService) { }
+  constructor(private authService: AuthService,
+      private messageService: MessageService) { }
 
   ngOnInit() {
   }
 
   signIn() {
-    this.loginService.login(this.email, this.password)
-    .then(auth => console.log(auth))
+    this.authService.login(this.email, this.password)
+    .then(email => {
+      this.messageService.add('logged in as ' + email);
+    })
     .catch(err => console.log('error:', err));
   }
 
