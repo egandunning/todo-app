@@ -1,3 +1,10 @@
+div.side {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 15%;
+}
+
 div.center {
     margin: 0.5em auto;
     text-align: center;

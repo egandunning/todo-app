@@ -13,7 +13,7 @@ export class LoginComponent implements OnInit {
   }
 
   signIn() {
-    alert('here');
+    
   }
 
   register() {

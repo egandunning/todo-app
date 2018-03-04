@@ -2,6 +2,13 @@
    font-family: sans-serif;
 }
 
+/* div.parent {
+    display: -webkit-flex; 
+    display: flex;
+    align-items: -webkit-flex-start;
+    align-items: flex-start;
+} */
+
 div.container {
     background-color: #f8f8f8;
     border: 1px solid black;
