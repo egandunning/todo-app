@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 
 import { AuthService } from '../auth.service';
 import { MessageService } from '../message.service';
@@ -16,7 +17,9 @@ export class LoginComponent implements OnInit {
   public password: string;
 
   constructor(private authService: AuthService,
-      private messageService: MessageService) { }
+    private messageService: MessageService,
+    private router: Router
+  ) { }
 
   ngOnInit() {
   }
@@ -25,8 +28,12 @@ export class LoginComponent implements OnInit {
     this.authService.login(this.email, this.password)
     .then(email => {
       this.messageService.add('logged in as ' + email);
+      this.router.navigate(['todos']);
     })
-    .catch(err => console.log('error:', err));
+    .catch(err => {
+      console.log('error:', err);
+      this.messageService.add('invalid credentials');
+    });
   }
 
   register() {

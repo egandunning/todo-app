@@ -28,6 +28,8 @@ export class AuthService {
           resolve(body.email);
         }
         reject("Incorrect credentials");
+      }, (err) => {
+        reject(err);
       });
     });
   }
