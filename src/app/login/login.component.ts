@@ -20,7 +20,9 @@ export class LoginComponent implements OnInit {
   }
 
   signIn() {
-    this.loginService.login(this.email, this.password);
+    this.loginService.login(this.email, this.password)
+    .then(auth => console.log(auth))
+    .catch(err => console.log('error:', err));
   }
 
   register() {
