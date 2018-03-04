@@ -1,9 +1,9 @@
 <div class="container">
   <form>
     <label>Email</label>
-    <input id="name" type="text" autofocus><br>
+    <input id="name" type="text" name="email" autofocus [(ngModel)]="email"><br>
     <label>Password</label>
-    <input id="pass" type="password"><br>
+    <input id="pass" type="password" name="password" [(ngModel)]="password"><br>
     <button id="submit" class="btn-blue" (click)="signIn()">Sign in</button>
     <button id="register" class="btn-green" (click)="register()">Register</button>
   </form>
