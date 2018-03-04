@@ -2,9 +2,11 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable()
-export class LoginService {
+export class AuthService {
 
   private url: string = 'https://lit-plateau-37029.herokuapp.com';
+
+  private token: string;
 
   constructor(private http: HttpClient) { }
 
@@ -21,7 +23,8 @@ export class LoginService {
       this.http.post(this.url + '/users/login', credentials, {observe: 'response'})
       .subscribe((res) => {
         if(res.status === 200) {
-          resolve(res.headers.get('X-Auth'));
+          this.token = res.headers.get('X-Auth')
+          resolve(this.token);
         }
         reject("Incorrect credentials");
       });
