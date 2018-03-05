@@ -13,6 +13,8 @@ import { TodoService } from './todo.service';
 import { MessagesComponent } from './messages/messages.component';
 import { MessageService } from './message.service';
 import { AppRoutingModule } from './app-routing.module';
+import { AuthService } from './auth.service';
+import { httpInterceptorProviders } from './http-interceptors/index';
 
 
 @NgModule({
@@ -32,7 +34,9 @@ import { AppRoutingModule } from './app-routing.module';
   ],
   providers: [
     TodoService,
-    MessageService
+    MessageService,
+    AuthService,
+    httpInterceptorProviders
   ],
   bootstrap: [AppComponent]
 })
