@@ -5,24 +5,41 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Todo } from './todo';
 import { MessageService } from './message.service';
+import { AuthService } from './auth.service';
 
 @Injectable()
 export class TodoService {
 
-  constructor(private http: HttpClient, private messageService: MessageService) { }
+  constructor(private http: HttpClient,
+    private messageService: MessageService,
+    private authService: AuthService
+  ) { }
 
   private url: string = 'https://lit-plateau-37029.herokuapp.com';
 
-  todos: Todo[] = [
-    new Todo('test', 'do the dishes', false, null),
-    new Todo('test', 'clean the kitchen', false, null),
-    new Todo('test', 'drive to MN', true, null)
-  ];
+  todos: Todo[];
 
-  getTodos(): Observable<Todo[]> {
-    //todo: display message after fetching todos
-    this.messageService.add('fetched todos. ' + new Date().toLocaleTimeString());
-    return this.http.get<Todo[]>(this.url + '/todos');
+  getTodos(): Promise<any> {
+    return new Promise((resolve, reject) => {
+
+      return this.http.get<Todo[]>(this.url + '/todos', {observe: 'response'})
+      .subscribe(res => {
+        const data: any = res.body;
+        const todoList: any[] = data.todos;
+        data.todos.forEach(todo => {
+          this.todos.push(new Todo(
+            todo.creator,
+            todo.text,
+            todo.completed,
+            todo.completedAt));
+        });
+        this.messageService.add('fetched todos. ' + new Date().toLocaleTimeString());
+        resolve(true);
+      }, err => {
+        this.messageService.add('failed to fetch todos. ' + new Date().toLocaleTimeString());
+        reject(err);
+      });
+    })    
   }
 
   addTodo(todo: Todo) {

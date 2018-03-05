@@ -6,7 +6,8 @@ export class AuthService {
 
   private url: string = 'https://lit-plateau-37029.herokuapp.com';
 
-  private token: string;
+  //TODO: find better solution - research singletons in TS
+  public static token: string;
 
   constructor(private http: HttpClient) { }
 
@@ -23,7 +24,7 @@ export class AuthService {
       this.http.post(this.url + '/users/login', credentials, {observe: 'response'})
       .subscribe((res) => {
         if(res.status === 200) {
-          this.token = res.headers.get('X-Auth')
+          AuthService.token = res.headers.get('X-Auth');
           const body: any = res.body;
           resolve(body.email);
         }

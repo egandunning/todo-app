@@ -22,6 +22,8 @@ export class TodoListComponent implements OnInit {
   }
 
   getTodos(): void {
-    this.todoService.getTodos().subscribe(todos => this.todos = todos);
+    this.todoService.getTodos()
+    .then(todos => this.todos = this.todoService.todos)
+    .catch(err => console.log(err));
   }
 }
