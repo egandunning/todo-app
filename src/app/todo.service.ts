@@ -17,7 +17,7 @@ export class TodoService {
 
   private url: string = 'https://lit-plateau-37029.herokuapp.com';
 
-  todos: Todo[];
+  todos: Todo[] = [];
 
   getTodos(): Promise<any> {
     return new Promise((resolve, reject) => {
@@ -26,6 +26,7 @@ export class TodoService {
       .subscribe(res => {
         const data: any = res.body;
         const todoList: any[] = data.todos;
+        this.todos = [];
         data.todos.forEach(todo => {
           this.todos.push(new Todo(
             todo.creator,
