@@ -59,13 +59,15 @@ export class LoginComponent implements OnInit {
 
     this.errorMessage = '';
 
-    if(this.password != this.passwordConfirm) {
-      this.errorMessage = this.passwordMismatchMsg;
+    //basic password validation
+    if(this.password.length < 8) {
+      this.errorMessage = this.passwordLengthMsg;
       return;
     }
 
-    if(this.password.length < 8) {
-      this.errorMessage = this.passwordLengthMsg;
+    if(this.password != this.passwordConfirm) {
+      this.errorMessage = this.passwordMismatchMsg;
+      return;
     }
 
     this.authService.register(this.email, this.password)
