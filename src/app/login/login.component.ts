@@ -37,6 +37,14 @@ export class LoginComponent implements OnInit {
   }
 
   register() {
-    alert('register');
+    this.authService.register(this.email, this.password)
+    .then(email => {
+      this.messageService.add('registered account: ' + email);
+      this.router.navigate(['todos']);
+    })
+    .catch(err => {
+      console.log('error:', err);
+      this.messageService.add('unable to register');
+    })
   }
 }

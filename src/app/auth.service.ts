@@ -21,17 +21,36 @@ export class AuthService {
   login(email: string, password: string): Promise<string> {
     return new Promise<string>((resolve, reject) => {
       const credentials = { email, password };
-      this.http.post(this.url + '/users/login', credentials, {observe: 'response'})
+      this.http.post(this.url + '/users/login', credentials, { observe: 'response' })
       .subscribe((res) => {
+        const body: any = res.body;
         if(res.status === 200) {
           AuthService.token = res.headers.get('X-Auth');
-          const body: any = res.body;
           resolve(body.email);
         }
-        reject("Incorrect credentials");
+        //todo: test
+        reject(body.message);
       }, (err) => {
         reject(err);
       });
     });
+  }
+
+  register(email: string, password: string): Promise<string> {
+    return new Promise<string>((resolve, reject) => {
+      const credentials = { email, password };
+      this.http.post(this.url + '/users', credentials, { observe: 'response' })
+      .subscribe((res) => {
+        const body: any = res.body;
+        if(res.status === 200) {
+          AuthService.token = res.headers.get('X-Auth');
+          resolve(body.email);
+        }
+        //todo: test
+        reject(body.message);
+      }, (err) => {
+        reject(err);
+      });
+    })
   }
 }
