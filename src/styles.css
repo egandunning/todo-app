@@ -2,12 +2,9 @@
    font-family: sans-serif;
 }
 
-/* div.parent {
-    display: -webkit-flex; 
-    display: flex;
-    align-items: -webkit-flex-start;
-    align-items: flex-start;
-} */
+.warn {
+    color: red;
+}
 
 div.container {
     background-color: #f8f8f8;

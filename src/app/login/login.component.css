@@ -1,14 +1,14 @@
-div {
+div.regular {
    margin: 1em auto;
-   padding: 1em 5em;
-   width: 20em;
+   padding: 1em 3em;
+   width: 25em;
    text-align: center;
 }
 
 label {
    text-align: left;
    display: inline-block;
-   width: 5em;
+   width: 9em;
 }
 
 input, button {

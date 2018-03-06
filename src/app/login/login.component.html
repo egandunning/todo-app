@@ -1,10 +1,27 @@
-<div class="container">
+<div class="container regular">
   <form>
     <label>Email</label>
     <input id="name" type="text" name="email" autofocus [(ngModel)]="email"><br>
     <label>Password</label>
-    <input id="pass" type="password" name="password" [(ngModel)]="password"><br>
-    <button id="submit" class="btn-blue" (click)="signIn()">Sign in</button>
-    <button id="register" class="btn-green" (click)="register()">Register</button>
+    <input id="pass" type="password" name="password" [(ngModel)]="password"
+      required minlength="8" #pass="ngModel"><br>
+    
+    <div *ngIf="registering">
+        <label>Confirm password</label>
+        <input class="password-tooltip" class="bigger" id="confirmPass"
+          type="password" name="passwordConfirm" [(ngModel)]="passwordConfirm"
+          required minlength="8" #pass2="ngModel">
+        <br>
+
+        <div *ngIf="pass.invalid && (pass.dirty || pass.touched)" class="warn">
+          Password must be 8 or more characters.
+        </div>
+        
+    </div>
+    <div *ngIf="errorMessage" class="warn">
+      {{ errorMessage }}
+    </div>
+    <button id="submit" class="btn-blue" (click)="submit()">{{registering ? "Sign up" : "Sign in"}}</button>
+    <button id="register" class="btn-green" (click)="toggleRegistering()">{{registering ? "Back to login" : "Create account"}}</button>
   </form>
 </div>

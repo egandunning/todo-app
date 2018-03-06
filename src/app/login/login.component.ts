@@ -15,6 +15,9 @@ export class LoginComponent implements OnInit {
 
   public email: string;
   public password: string;
+  public passwordConfirm: string;
+  public registering: boolean = false;
+  public errorMessage: string;
 
   constructor(private authService: AuthService,
     private messageService: MessageService,
@@ -24,7 +27,18 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   }
 
+  toggleRegistering() {
+    this.errorMessage = '';
+    this.registering = !this.registering;
+  }
+
+  submit() {
+    this.registering ? this.register() : this.signIn();
+  }
+
   signIn() {
+    this.errorMessage = '';
+
     this.authService.login(this.email, this.password)
     .then(email => {
       this.messageService.add('logged in as ' + email);
@@ -32,11 +46,19 @@ export class LoginComponent implements OnInit {
     })
     .catch(err => {
       console.log('error:', err);
-      this.messageService.add('invalid credentials');
+      this.errorMessage = 'Invalid email or password.';
     });
   }
 
   register() {
+
+    this.errorMessage = '';
+
+    if(this.password != this.passwordConfirm) {
+      this.errorMessage = 'Passwords don\'t match.';
+      return;
+    }
+
     this.authService.register(this.email, this.password)
     .then(email => {
       this.messageService.add('registered account: ' + email);
@@ -44,7 +66,7 @@ export class LoginComponent implements OnInit {
     })
     .catch(err => {
       console.log('error:', err);
-      this.messageService.add('unable to register');
+      this.errorMessage = 'Unable to register. Probable cause: invalid email.';
     })
   }
 }
