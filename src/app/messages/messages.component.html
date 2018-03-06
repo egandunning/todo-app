@@ -2,7 +2,10 @@
   <div class="center">
     <button class="btn-green" (click)="messageService.clear()">Clear all Messages</button>
   </div>
-  <div class="message" *ngFor="let message of messageService.messages">
-    {{message}}
+  <div class="scroll">
+    <div class="message" *ngFor="let message of messageService.messages">
+      {{message}}
+    </div>
   </div>
+ 
 </div>

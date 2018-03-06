@@ -3,11 +3,25 @@ div.side {
     top: 0;
     bottom: 0;
     width: 15%;
+    height: 100%;
+}
+
+div.scroll {
+    overflow-y:scroll;
+    height: 85%;
 }
 
 div.center {
-    margin: 0.5em auto;
+    margin: 0 auto;
     text-align: center;
+    height: 15%;
+    position: relative;
+}
+
+button {
+    bottom: 0.5em;
+    left: 1em;
+    position: absolute;
 }
 
 div.message {
