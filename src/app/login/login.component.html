@@ -14,7 +14,7 @@
         <br>
 
         <div *ngIf="pass.invalid && (pass.dirty || pass.touched)" class="warn">
-          Password must be 8 or more characters.
+          {{ passwordLengthMsg }}
         </div>
         
     </div>

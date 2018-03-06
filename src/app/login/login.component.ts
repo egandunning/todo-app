@@ -19,6 +19,11 @@ export class LoginComponent implements OnInit {
   public registering: boolean = false;
   public errorMessage: string;
 
+  private readonly invalidEmailMsg: string = 'Invalid email or password.';
+  private readonly passwordMismatchMsg: string = 'Passwords don\'t match.';
+  private readonly passwordLengthMsg: string = 'Password must be 8 or more characters.';
+  private readonly registerErrorMsg: string = 'Unable to register. Probable cause: invalid email.';
+
   constructor(private authService: AuthService,
     private messageService: MessageService,
     private router: Router
@@ -46,7 +51,7 @@ export class LoginComponent implements OnInit {
     })
     .catch(err => {
       console.log('error:', err);
-      this.errorMessage = 'Invalid email or password.';
+      this.errorMessage = this.invalidEmailMsg;
     });
   }
 
@@ -55,8 +60,12 @@ export class LoginComponent implements OnInit {
     this.errorMessage = '';
 
     if(this.password != this.passwordConfirm) {
-      this.errorMessage = 'Passwords don\'t match.';
+      this.errorMessage = this.passwordMismatchMsg;
       return;
+    }
+
+    if(this.password.length < 8) {
+      this.errorMessage = this.passwordLengthMsg;
     }
 
     this.authService.register(this.email, this.password)
@@ -66,7 +75,7 @@ export class LoginComponent implements OnInit {
     })
     .catch(err => {
       console.log('error:', err);
-      this.errorMessage = 'Unable to register. Probable cause: invalid email.';
+      this.errorMessage = this.registerErrorMsg;
     })
   }
 }
