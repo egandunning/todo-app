@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 
 import { Todo } from './todo';
 import { MessageService } from './message.service';
@@ -43,9 +43,25 @@ export class TodoService {
     })    
   }
 
-  addTodo(todo: Todo) {
-    //todo: send to server
-    this.todos.unshift(todo);
-    this.messageService.add('added todo. ' + new Date().toLocaleTimeString());
+  addTodo(todo: Todo): Promise<any> {    
+    return new Promise((resolve, reject) => {
+
+      //todo: use es6
+      const data = { text: todo.text, completed: false };
+
+      return this.http.post(this.url + '/todos', data, {observe: 'response'})
+      .subscribe((res: HttpResponse<any>) => {
+        if(res.status === 200) {
+          this.todos.unshift(todo);
+          this.messageService.add('added todo. ' + new Date().toLocaleTimeString());
+          return resolve(true);
+        }
+        this.messageService.add('failed to add todo. ' + new Date().toLocaleTimeString());
+        reject(false);
+      }, err => {
+        this.messageService.add('failed to add todo. ' + new Date().toLocaleTimeString());
+        reject(false);
+      });
+    });
   }
 }
