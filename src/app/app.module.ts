@@ -14,6 +14,7 @@ import { MessagesComponent } from './messages/messages.component';
 import { MessageService } from './message.service';
 import { AppRoutingModule } from './app-routing.module';
 import { AuthService } from './auth.service';
+import { ConfigService } from './config.service';
 import { httpInterceptorProviders } from './http-interceptors/index';
 
 
@@ -36,6 +37,7 @@ import { httpInterceptorProviders } from './http-interceptors/index';
     TodoService,
     MessageService,
     AuthService,
+    ConfigService,
     httpInterceptorProviders
   ],
   bootstrap: [AppComponent]
