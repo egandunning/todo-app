@@ -13,9 +13,14 @@ export class ConfigService {
   constructor(private http: HttpClient) { }
 
   getConfig() {
-    return this.http.get<Config>(this.configUrl)
-    .subscribe(data => {
-      this.config = data;
+    return new Promise((resolve, reject) => {
+      this.http.get<Config>(this.configUrl)
+      .subscribe(data => {
+        this.config = data;
+        resolve(data);
+      }, error => {
+        reject(error);
+      });
     });
   }
 }

@@ -7,6 +7,7 @@ import { Todo } from './todo';
 import { MessageService } from './message.service';
 import { AuthService } from './auth.service';
 import { ConfigService } from './config.service';
+import { Config } from './config';
 
 @Injectable()
 export class TodoService {
@@ -23,10 +24,14 @@ export class TodoService {
 
   todos: Todo[] = [];
 
-  getTodos(): Promise<any> {
+  async getTodos(): Promise<any> {
+
+    const configData: any = this.configService.config || await this.configService.getConfig();
+    console.log("config data:", configData);
+
     return new Promise((resolve, reject) => {
 
-      return this.http.get<Todo[]>(this.configService.config.todoUrl + '/todos', {observe: 'response'})
+      return this.http.get<Todo[]>(configData.todoUrl + '/todos', {observe: 'response'})
       .subscribe(res => {
         const data: any = res.body;
         const todoList: any[] = data.todos;
@@ -47,13 +52,15 @@ export class TodoService {
     })    
   }
 
-  addTodo(todo: Todo): Promise<any> {    
+  async addTodo(todo: Todo): Promise<any> {
+    const configData: any = this.configService.config || await this.configService.getConfig();
+    console.log("config data:", configData);
     return new Promise((resolve, reject) => {
 
       //todo: use es6
       const data = { text: todo.text, completed: false };
 
-      return this.http.post(this.configService.config.todoUrl + '/todos', data, {observe: 'response'})
+      return this.http.post(configData.todoUrl + '/todos', data, {observe: 'response'})
       .subscribe((res: HttpResponse<any>) => {
         if(res.status === 200) {
           this.todos.unshift(todo);
