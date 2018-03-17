@@ -1,2 +1,5 @@
-<app-new-todo></app-new-todo>
+<div class="container">
+    <app-new-todo></app-new-todo>
+    <button class="btn-green" (click)="getTodos()">Reload</button>
+</div>
 <app-todo *ngFor="let todo of todos" [todo]="todo"></app-todo>
