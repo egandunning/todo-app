@@ -6,23 +6,27 @@ import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Todo } from './todo';
 import { MessageService } from './message.service';
 import { AuthService } from './auth.service';
+import { ConfigService } from './config.service';
 
 @Injectable()
 export class TodoService {
 
+  private static url: string;
+
   constructor(private http: HttpClient,
     private messageService: MessageService,
-    private authService: AuthService
-  ) { }
-
-  private url: string = 'https://lit-plateau-37029.herokuapp.com';
+    private authService: AuthService,
+    private configService: ConfigService
+  ) {
+    this.configService.getConfig();
+  }
 
   todos: Todo[] = [];
 
   getTodos(): Promise<any> {
     return new Promise((resolve, reject) => {
 
-      return this.http.get<Todo[]>(this.url + '/todos', {observe: 'response'})
+      return this.http.get<Todo[]>(this.configService.config.todoUrl + '/todos', {observe: 'response'})
       .subscribe(res => {
         const data: any = res.body;
         const todoList: any[] = data.todos;
@@ -49,7 +53,7 @@ export class TodoService {
       //todo: use es6
       const data = { text: todo.text, completed: false };
 
-      return this.http.post(this.url + '/todos', data, {observe: 'response'})
+      return this.http.post(this.configService.config.todoUrl + '/todos', data, {observe: 'response'})
       .subscribe((res: HttpResponse<any>) => {
         if(res.status === 200) {
           this.todos.unshift(todo);
