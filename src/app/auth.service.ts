@@ -19,12 +19,20 @@ export class AuthService {
    */
   login(email: string, password: string): Promise<string> {
     return new Promise<string>((resolve, reject) => {
+
+      const storedAuth = window.localStorage.getItem('auth');
+      if(storedAuth) {
+        console.log('from localStorage:', storedAuth);
+        AuthService.token = storedAuth;
+      }
+
       const credentials = { email, password };
       this.http.post(this.url + '/users/login', credentials, { observe: 'response' })
       .subscribe((res) => {
         const body: any = res.body;
         if(res.status === 200) {
           AuthService.token = res.headers.get('X-Auth');
+          window.localStorage.setItem('auth', AuthService.token);
           resolve(body.email);
         }
         //todo: test

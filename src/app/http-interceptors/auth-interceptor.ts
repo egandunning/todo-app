@@ -16,7 +16,7 @@ export class AuthInterceptor implements HttpInterceptor {
     Observable<HttpEvent<any>> {
     req.headers.set('X-Auth', AuthService.token);
     req.headers.append('X-Auth', AuthService.token);
-    const modified = req.clone({ setHeaders: { 'X-Auth': AuthService.token || '' } });
+    const modified = req.clone({ setHeaders: { 'X-Auth': AuthService.token || window.localStorage.getItem('auth') || '' } });
     console.log(modified.headers);
     return next.handle(modified);
   }
