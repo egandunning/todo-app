@@ -6,7 +6,6 @@ export class AuthService {
 
   private url: string = 'https://lit-plateau-37029.herokuapp.com';
 
-  //TODO: find better solution - research singletons in TS
   public static token: string;
 
   constructor(private http: HttpClient) { }

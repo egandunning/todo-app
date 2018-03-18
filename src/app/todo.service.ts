@@ -5,7 +5,6 @@ import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 
 import { Todo } from './todo';
 import { MessageService } from './message.service';
-import { AuthService } from './auth.service';
 import { ConfigService } from './config.service';
 import { Config } from './config';
 
@@ -16,7 +15,6 @@ export class TodoService {
 
   constructor(private http: HttpClient,
     private messageService: MessageService,
-    private authService: AuthService,
     private configService: ConfigService
   ) { }
 
