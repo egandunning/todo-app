@@ -35,7 +35,7 @@ export class TodoService {
         const todoList: any[] = data.todos;
         this.todos = [];
         data.todos.forEach(todo => {
-          this.todos.push(new Todo(
+          this.todos.unshift(new Todo(
             todo.creator,
             todo.text,
             todo.completed,
