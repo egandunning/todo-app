@@ -18,9 +18,7 @@ export class TodoService {
     private messageService: MessageService,
     private authService: AuthService,
     private configService: ConfigService
-  ) {
-    this.configService.getConfig();
-  }
+  ) { }
 
   todos: Todo[] = [];
 
