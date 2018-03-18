@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 
 import { Todo } from '../todo';
+import { TodoService } from '../todo.service';
 
 @Component({
   selector: 'app-todo',
@@ -13,13 +14,14 @@ export class TodoComponent implements OnInit {
 
   @Input() todo: Todo;
 
-  constructor() { }
+  constructor(public todoService: TodoService) { }
 
   ngOnInit() {
   }
 
   complete() {
     this.todo.completed = !this.todo.completed;
+    this.todoService.updateTodo(this.todo);
   }
 
 }

@@ -23,7 +23,6 @@ export class TodoService {
   async getTodos(): Promise<any> {
 
     const configData: any = this.configService.config || await this.configService.getConfig();
-    console.log("config data:", configData);
 
     return new Promise((resolve, reject) => {
 
@@ -34,6 +33,7 @@ export class TodoService {
         this.todos = [];
         data.todos.forEach(todo => {
           this.todos.unshift(new Todo(
+            todo._id,
             todo.creator,
             todo.text,
             todo.completed,
@@ -48,9 +48,29 @@ export class TodoService {
     })    
   }
 
-  async addTodo(todo: Todo): Promise<any> {
+  async updateTodo(todo: Todo): Promise<any> {
     const configData: any = this.configService.config || await this.configService.getConfig();
-    console.log("config data:", configData);
+
+    return new Promise((resolve, reject) => {
+      return this.http.patch(configData.todoUrl + '/todos/' + todo._id, todo, {observe: 'response'})
+      .subscribe((res: HttpResponse<any>) => {
+        if(res.status === 200) {
+          this.messageService.add('todo updated. ' + new Date().toLocaleTimeString());
+          return resolve(true);
+        }
+        this.messageService.add('failed to update todo. ' + new Date().toLocaleTimeString());
+        reject(false);
+      }, err => {
+        this.messageService.add('failed to update todo. ' + new Date().toLocaleTimeString());
+        reject(false);
+      })
+    });
+  }
+
+  async addTodo(todo: Todo): Promise<any> {
+
+    const configData: any = this.configService.config || await this.configService.getConfig();
+
     return new Promise((resolve, reject) => {
 
       //todo: use es6
