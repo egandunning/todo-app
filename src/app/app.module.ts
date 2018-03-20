@@ -16,6 +16,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AuthService } from './auth.service';
 import { ConfigService } from './config.service';
 import { httpInterceptorProviders } from './http-interceptors/index';
+import { ModalComponent } from './modal/modal.component';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { httpInterceptorProviders } from './http-interceptors/index';
     TodoComponent,
     NewTodoComponent,
     TodoListComponent,
-    MessagesComponent
+    MessagesComponent,
+    ModalComponent
   ],
   imports: [
     BrowserModule,
