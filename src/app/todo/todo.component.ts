@@ -35,6 +35,7 @@ export class TodoComponent implements OnInit {
   complete() {
     this.todo.completed = !this.todo.completed;
     this.todoService.updateTodo(this.todo);
+    this.todoService.getTodos();
     this.formatDate();
   }
 
@@ -46,6 +47,6 @@ export class TodoComponent implements OnInit {
 
     let prettyString: string = new Date(this.todo.completedAt).toString();
     //remove the GMT offset from string
-    this.prettyDate = prettyString.replace(/GMT-\d* /, '');;
+    this.prettyDate = prettyString.replace(/GMT-\d* /, '');
   }
 }
