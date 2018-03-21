@@ -2,7 +2,13 @@
   <p class="text">
     <img [src]="todo.completed ? '../../assets/done.png' : '../../assets/notdone.png'"
         (click)="complete()">
-    {{todo.text}} ({{todo.completed ? 'done!' : 'not done.'}})
+    <span *ngIf="!editing" (dblclick)="edit()">
+      {{todo.text}} ({{todo.completed ? 'done!' : 'not done.'}})
+    </span>
+    <span *ngIf="editing">
+      <input type="text" [(ngModel)]="todo.text" autocomplete="off">
+      <button class="btn-blue" (click)="edit()">Update</button>
+    </span>
   </p>
   <p class="date">{{todo.completedAt}}</p>
 </div>

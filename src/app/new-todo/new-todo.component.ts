@@ -12,6 +12,7 @@ import { TodoService } from '../todo.service';
 export class NewTodoComponent implements OnInit {
 
   todo: Todo = {
+    _id: '', //sever will fill this in
     creator: 'test',
     text: '',
     completed: false,
