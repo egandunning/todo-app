@@ -13,12 +13,14 @@ export class TodoComponent implements OnInit {
 
   icon: '../../assets/done.png';
   public editing: boolean = false;
+  public prettyDate: string = '';
 
   @Input() todo: Todo;
 
   constructor(public todoService: TodoService) { }
 
   ngOnInit() {
+    this.formatDate();
   }
 
   edit() {
@@ -33,6 +35,17 @@ export class TodoComponent implements OnInit {
   complete() {
     this.todo.completed = !this.todo.completed;
     this.todoService.updateTodo(this.todo);
+    this.formatDate();
   }
 
+  formatDate() {
+    if(!this.todo.completed) {
+      this.prettyDate = '';
+      return;
+    }
+
+    let prettyString: string = new Date(this.todo.completedAt).toString();
+    //remove the GMT offset from string
+    this.prettyDate = prettyString.replace(/GMT-\d* /, '');;
+  }
 }
