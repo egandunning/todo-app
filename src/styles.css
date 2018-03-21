@@ -20,6 +20,10 @@ button {
    font-size: 1em;
 }
 
+input {
+    font-size: 1em;
+}
+
 button.btn-blue {
    background-color: #222290;
    color: #eee;
