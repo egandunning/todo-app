@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { Todo } from '../todo';
 import { TodoComponent } from '../todo/todo.component';
@@ -17,7 +18,9 @@ export class TodoListComponent implements OnInit {
   todos: Todo[];
 
   constructor(private todoService: TodoService,
-    private authService: AuthService) { }
+    private authService: AuthService,
+    private messageService: MessageService,
+    private router: Router) { }
 
   ngOnInit() {
     this.getTodos();
@@ -31,7 +34,10 @@ export class TodoListComponent implements OnInit {
 
   logout() {
     this.authService.logout()
-    .then(msg => console.log(msg))
-    .catch(msg => console.log(msg));
+    .then(msg => {
+      this.router.navigate(['login']);
+      this.messageService.clear();
+    })
+    .catch(msg => this.messageService.add(msg + ' ' + new Date().toLocaleTimeString()));
   }
 }

@@ -74,12 +74,11 @@ export class AuthService {
         if(res.status === 200) {
           window.localStorage.setItem('auth', '');
           resolve('logout successful');
-          //route to login
         } else {
           reject('logout unsuccessful');
         }
       }, (err) => {
-        reject('logout usuccessful');
+        reject('logout unsuccessful');
       });
     });
   }
