@@ -33,6 +33,7 @@ export class AuthService {
         if(res.status === 200) {
           AuthService.token = res.headers.get('X-Auth');
           window.localStorage.setItem('auth', AuthService.token);
+          window.localStorage.setItem('email', email);
           resolve(body.email);
         }
         //todo: test
@@ -58,6 +59,28 @@ export class AuthService {
       }, (err) => {
         reject(err);
       });
-    })
+    });
+  }
+
+  logout(): Promise<string> {
+    
+    return new Promise<string>((resolve, reject) => {
+
+      let user = { email: window.localStorage.getItem('email') };
+
+      this.http.request('delete', this.url + '/users/me/token', { observe: 'response', body: user })
+      .subscribe((res) => {
+        const body: any = res.body;
+        if(res.status === 200) {
+          window.localStorage.setItem('auth', '');
+          resolve('logout successful');
+          //route to login
+        } else {
+          reject('logout unsuccessful');
+        }
+      }, (err) => {
+        reject('logout usuccessful');
+      });
+    });
   }
 }

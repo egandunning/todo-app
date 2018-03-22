@@ -5,6 +5,7 @@ import { TodoComponent } from '../todo/todo.component';
 import { NewTodoComponent } from '../new-todo/new-todo.component';
 import { TodoService } from '../todo.service';
 import { MessageService } from '../message.service';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-todo-list',
@@ -15,7 +16,8 @@ export class TodoListComponent implements OnInit {
 
   todos: Todo[];
 
-  constructor(private todoService: TodoService) { }
+  constructor(private todoService: TodoService,
+    private authService: AuthService) { }
 
   ngOnInit() {
     this.getTodos();
@@ -25,5 +27,11 @@ export class TodoListComponent implements OnInit {
     this.todoService.getTodos()
     .then(todos => this.todos = this.todoService.todos)
     .catch(err => console.log(err));
+  }
+
+  logout() {
+    this.authService.logout()
+    .then(msg => console.log(msg))
+    .catch(msg => console.log(msg));
   }
 }

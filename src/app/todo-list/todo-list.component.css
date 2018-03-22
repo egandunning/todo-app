@@ -4,3 +4,9 @@ div {
     width: 60%;
     padding: 0.5em;
 }
+
+button.logout {
+    position: absolute;
+    right: 1em;
+    top: 1em;
+}
