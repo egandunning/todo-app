@@ -72,6 +72,27 @@ export class TodoService {
     });
   }
 
+  async deleteTodo(todoId: string): Promise<any> {
+    
+    const configData: any = this.configService.config || await this.configService.getConfig();
+
+    return new Promise((resolve, reject) => {
+      return this.http.delete(configData.todoUrl + '/todos/' + todoId, {observe: 'response'})
+      .subscribe((res: HttpResponse<any>) => {
+        if(res.status === 200) {
+          this.todos = this.todos.filter(todo => todo._id != todoId);
+          this.messageService.add('deleted todo. ' + new Date().toLocaleTimeString());
+          return resolve(true);
+        }
+        this.messageService.add('failed to delete todo. ' + new Date().toLocaleTimeString());
+        reject(false);
+      }, err => {
+        this.messageService.add('failed to delete todo. ' + new Date().toLocaleTimeString());
+        reject(false);
+      });
+    });
+  }
+
   async addTodo(todo: Todo): Promise<any> {
 
     const configData: any = this.configService.config || await this.configService.getConfig();
