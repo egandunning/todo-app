@@ -36,8 +36,12 @@ export class TodoComponent implements OnInit {
   complete() {
     this.todo.completed = !this.todo.completed;
     this.todoService.updateTodo(this.todo);
-    this.todoService.getTodos();
-    this.formatDate();
+    this.todoService.getTodos()
+    .then(todos => {
+      this.todo = this.todoService.todos.find(todo => todo._id === this.todo._id);
+      this.formatDate();
+    })
+    .catch(err => console.log('error fetching todos'));
   }
 
   delete() {
