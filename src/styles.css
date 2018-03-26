@@ -34,6 +34,11 @@ button.btn-green {
    color: #eee;
 }
 
+button.btn-red {
+    background-color: #902222;
+    color: #eee
+}
+
 /*darken background and lighten text*/
 button.btn-blue:hover {
    background-color: #111190;
@@ -43,6 +48,11 @@ button.btn-blue:hover {
 button.btn-green:hover {
    background-color: #119011;
    color: white;
+}
+
+button.btn-red:hover {
+    background-color: #901111;
+    color: white;
 }
 
 /*animate button press*/
