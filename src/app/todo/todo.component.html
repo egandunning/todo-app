@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" *ngIf="exists">
   <p class="text">
     <img [src]="todo.completed ? '../../assets/done.png' : '../../assets/notdone.png'"
         (click)="complete()">
@@ -8,6 +8,7 @@
     <span *ngIf="editing">
       <input type="text" [(ngModel)]="todo.text" autocomplete="off">
       <button class="btn-blue" (click)="update()">Update</button>
+      <button class="btn-red" (click)="delete()">Delete</button>
     </span>
   </p>
   <p class="date">{{prettyDate}}</p>

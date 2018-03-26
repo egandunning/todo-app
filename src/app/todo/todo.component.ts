@@ -13,6 +13,7 @@ export class TodoComponent implements OnInit {
 
   icon: '../../assets/done.png';
   public editing: boolean = false;
+  public exists: boolean = true;
   public prettyDate: string = '';
 
   @Input() todo: Todo;
@@ -37,6 +38,11 @@ export class TodoComponent implements OnInit {
     this.todoService.updateTodo(this.todo);
     this.todoService.getTodos();
     this.formatDate();
+  }
+
+  delete() {
+    this.todoService.deleteTodo(this.todo._id);
+    this.exists = false;
   }
 
   formatDate() {
