@@ -39,8 +39,13 @@ export class TodoService {
             todo.completed,
             todo.completedAt));
         });
-        this.messageService.add('fetched todos. ' + new Date().toLocaleTimeString());
-        resolve(true);
+        if(res.status === 200) {
+          this.messageService.add('fetched todos. ' + new Date().toLocaleTimeString());
+          resolve(true);
+        } else {
+          this.messageService.add('failed to fetch todos. ' + new Date().toLocaleTimeString());
+          reject(res.status);
+        }
       }, err => {
         this.messageService.add('failed to fetch todos. ' + new Date().toLocaleTimeString());
         reject(err);

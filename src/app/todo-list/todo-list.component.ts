@@ -29,14 +29,17 @@ export class TodoListComponent implements OnInit {
   getTodos(): void {
     this.todoService.getTodos()
     .then(todos => this.todos = this.todoService.todos)
-    .catch(err => console.log(err));
+    .catch(err => {
+      this.messageService.clear();
+      this.router.navigate(['login']);
+    });
   }
 
   logout() {
     this.authService.logout()
     .then(msg => {
-      this.router.navigate(['login']);
       this.messageService.clear();
+      this.router.navigate(['login']);
     })
     .catch(msg => this.messageService.add(msg + ' ' + new Date().toLocaleTimeString()));
   }

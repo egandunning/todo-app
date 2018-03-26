@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class AuthService {
@@ -8,7 +9,7 @@ export class AuthService {
 
   public static token: string;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
   /**
    * Sends a POST request to /users/login with email and password. If these
@@ -74,11 +75,14 @@ export class AuthService {
         if(res.status === 200) {
           window.localStorage.setItem('auth', '');
           resolve('logout successful');
-        } else {
+        } else if(res.status === 401) {
           reject('logout unsuccessful');
+          this.router.navigate(['login']);
         }
+        reject('logout unsuccessful');
       }, (err) => {
         reject('logout unsuccessful');
+        this.router.navigate(['login']);
       });
     });
   }
