@@ -53,21 +53,21 @@ export class TodoService {
     })    
   }
 
-  async updateTodo(todo: Todo): Promise<any> {
+  async updateTodo(todo: Todo): Promise<Todo> {
     const configData: any = this.configService.config || await this.configService.getConfig();
 
-    return new Promise((resolve, reject) => {
+    return new Promise<Todo>((resolve, reject) => {
       return this.http.patch(configData.todoUrl + '/todos/' + todo._id, todo, {observe: 'response'})
       .subscribe((res: HttpResponse<any>) => {
         if(res.status === 200) {
           this.messageService.add('todo updated. ' + new Date().toLocaleTimeString());
-          return resolve(true);
+          return resolve(res.body.todo);
         }
         this.messageService.add('failed to update todo. ' + new Date().toLocaleTimeString());
-        reject(false);
+        reject(null);
       }, err => {
         this.messageService.add('failed to update todo. ' + new Date().toLocaleTimeString());
-        reject(false);
+        reject(null);
       })
     });
   }
