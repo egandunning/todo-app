@@ -4,7 +4,7 @@ div {
     padding: 0.5em;
 }
 
-img {
+input[type=checkbox] {
     height: 1em;
     width: 1em;
     margin-right: 0.5em;

@@ -1,7 +1,6 @@
 <div class="container" *ngIf="exists">
   <p class="text">
-    <img [src]="todo.completed ? '../../assets/done.png' : '../../assets/notdone.png'"
-        (click)="complete()">
+    <input type="checkbox" (click)="complete()">
     <span *ngIf="!editing" (dblclick)="edit()">
       {{todo.text}} ({{todo.completed ? 'done!' : 'not done.'}})
     </span>
